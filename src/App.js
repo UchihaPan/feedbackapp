@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import PropTypes from 'prop-types'
+import FeedbackList from "./components/FeedbackList";
+import { useState } from "react";
+import FeedbackData from "./components/Data/Feedbackdata";
+import FeedbackStats from "./components/FeedbackStats";
 
 function App() {
+  const [feedback,setfeedback]=useState(FeedbackData)
+
+  function deletetodo(id){
+    setfeedback(feedback.filter(item =>
+       item.id !== id))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Header text='TodoList'/>
+    <div className="container">
+<FeedbackStats feedback={feedback}/>
+      <FeedbackList feedback={feedback} deletetodo={deletetodo} />
     </div>
+    
+    </>
   );
 }
 
