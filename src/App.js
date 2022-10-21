@@ -1,28 +1,24 @@
-import Header from "./components/Header";
-import PropTypes from 'prop-types'
-import FeedbackList from "./components/FeedbackList";
-import { useState } from "react";
-import FeedbackData from "./components/Data/Feedbackdata";
-import FeedbackStats from "./components/FeedbackStats";
+import Header from './components/Header'
+import FeedbackList from './components/FeedbackList'
+import FeedbackStats from './components/FeedbackStats'
+import FeedbackForm from './components/FeedbackForm'
+
+import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
-  const [feedback,setfeedback]=useState(FeedbackData)
-
-  function deletetodo(id){
-    setfeedback(feedback.filter(item =>
-       item.id !== id))
-  }
-
   return (
-    <>
-    <Header text='TodoList'/>
-    <div className="container">
-<FeedbackStats feedback={feedback}/>
-      <FeedbackList feedback={feedback} deletetodo={deletetodo} />
-    </div>
-    
-    </>
-  );
+    <FeedbackProvider>
+        <Header />
+        <div className='container'>
+
+                
+                  <FeedbackForm />
+                  <FeedbackStats />
+                  <FeedbackList />
+
+        </div>
+    </FeedbackProvider>
+  )
 }
 
-export default App;
+export default App
